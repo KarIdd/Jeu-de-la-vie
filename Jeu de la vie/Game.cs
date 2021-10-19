@@ -18,7 +18,6 @@ namespace Jeu_de_la_vie
             n = nbCells;
             iter = nbIterations;
             AliveCellsCoords = new List<Coords>();
-            grid = new Grid(n, AliveCellsCoords);
             random = new Random();
             for (int i = 0; i < n; i++)
             {
@@ -31,6 +30,7 @@ namespace Jeu_de_la_vie
                     }
                 }
             }
+            grid = new Grid(n, AliveCellsCoords);
         }
 
         public void RunGameConsole() // Méthode de supervisation qui implémente
@@ -41,6 +41,7 @@ namespace Jeu_de_la_vie
                 grid.UpdateGrid();
                 grid.DisplayGrid();
                 Thread.Sleep(1000);
+                iter--;
             }
         }
 

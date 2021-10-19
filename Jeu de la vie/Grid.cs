@@ -22,6 +22,7 @@ namespace Jeu_de_la_vie
                 {
                     if (AliveCellsCoords.Contains(new Coords(i,j)))
                     {
+                        Console.WriteLine("Je m'active");
                         TabCells[i, j] = new Cell(true);
                     }
                     else
@@ -35,35 +36,35 @@ namespace Jeu_de_la_vie
         public int getNbAliveNeighboor(int i, int j) // Méthode qui permet de déterminer le nombre de cellules vivantes autour d’un emplacement de coordonnées (i,j)
         {
             int nbCells = 0;
-            if (TabCells[i-1, j].isAlive == true)
+            if (i - 1 >= 0 && TabCells[i - 1, j].isAlive == true)
             {
                 nbCells += 1;
             }
-            if (TabCells[i+1, j].isAlive == true)
+            if (i + 1 < n && TabCells[i + 1, j].isAlive == true)
             {
                 nbCells += 1;  
             }
-            if (TabCells[i, j-1].isAlive == true)
+            if (j - 1 >= 0 && TabCells[i, j - 1].isAlive == true)
             {
                 nbCells += 1;
             }
-            if (TabCells[i, j+1].isAlive == true)
+            if (j + 1 < n && TabCells[i, j + 1].isAlive == true)
             {
                 nbCells += 1;
             }
-            if (TabCells[i+1, j+1].isAlive == true)
+            if (j + 1 < n && i + 1 < n && TabCells[i + 1, j + 1].isAlive == true)
             {
                 nbCells += 1;
             }
-            if (TabCells[i-1, j-1].isAlive == true)
+            if (i - 1 >= 0 && j - 1 >= 0 && TabCells[i - 1, j - 1].isAlive == true)
             {
                 nbCells += 1;
             }
-            if (TabCells[i+1, j-1].isAlive == true)
+            if (i + 1 < n && j - 1 >= 0 && TabCells[i + 1, j - 1].isAlive == true)
             {
                 nbCells += 1;
             }
-            if (TabCells[i-1, j+1].isAlive == true)
+            if (i - 1 >= 0 && j + 1 < n && TabCells[i - 1, j + 1].isAlive == true)
             {
                 nbCells += 1;
             }
@@ -73,35 +74,35 @@ namespace Jeu_de_la_vie
         public List<Coords> getCoordsNeighboors(int i, int j) // Méthode qui permet de déterminer toutes les coordonnées valides autour d’un emplacement de coordonnées(i, j)(attention à la gestion des cas particulier en bordure de grille)
         {
             List<Coords> tempCoords = new List<Coords>();
-            if (TabCells[i - 1, j].isAlive == true)
+            if (i - 1 >= 0 && TabCells[i - 1, j].isAlive == true)
             {
                 tempCoords.Add(new Coords(i - 1, j));
             }
-            if (TabCells[i + 1, j].isAlive == true)
+            if (i + 1 < n && TabCells[i + 1, j].isAlive == true)
             {
                 tempCoords.Add(new Coords(i + 1, j));
             }
-            if (TabCells[i, j - 1].isAlive == true)
+            if (j - 1 >= 0 && TabCells[i, j - 1].isAlive == true)
             {
                 tempCoords.Add(new Coords(i , j - 1));
             }
-            if (TabCells[i, j + 1].isAlive == true)
+            if (j + 1 < n && TabCells[i, j + 1].isAlive == true)
             {
                 tempCoords.Add(new Coords(i , j + 1));
             }
-            if (TabCells[i + 1, j + 1].isAlive == true)
+            if (j + 1 < n && i + 1 < n && TabCells[i + 1, j + 1].isAlive == true)
             {
                 tempCoords.Add(new Coords(i + 1, j + 1));
             }
-            if (TabCells[i - 1, j - 1].isAlive == true)
+            if (i - 1 >= 0 && j - 1 >= 0 && TabCells[i - 1, j - 1].isAlive == true)
             {
                 tempCoords.Add(new Coords(i - 1, j - 1));
             }
-            if (TabCells[i + 1, j - 1].isAlive == true)
+            if (i - 1 >= 0 && j - 1 >= 0 && TabCells[i + 1, j - 1].isAlive == true)
             {
                 tempCoords.Add(new Coords(i + 1, j - 1));
             }
-            if (TabCells[i - 1, j + 1].isAlive == true)
+            if (i - 1 >= 0 && j + 1 < n && TabCells[i - 1, j + 1].isAlive == true)
             {
                 tempCoords.Add(new Coords(i - 1, j + 1));
             }
@@ -126,13 +127,26 @@ namespace Jeu_de_la_vie
 
         public void DisplayGrid() // Méthode qui permet d’afficher une représentation de grille en console avec un X à chaque emplacement où une cellule est vivante
         {
+            string stateCell;
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    
+                    Console.Write("+---");
                 }
+                Console.Write("+\n");
+                for (int j = 0; j < n; j++)
+                {
+                    if (TabCells[i, j].isAlive == true) { stateCell = "X"; } else { stateCell = " "; }
+                    Console.Write("| {0} ", stateCell);
+                }
+                Console.Write("|\n");
             }
+            for (int j = 0; j < n; j++)
+            {
+                Console.Write("+---");
+            }
+            Console.Write("+\n");
         }
 
         public void UpdateGrid() // Méthode qui parcourt chaque cellule et qui met à jour leur attribut _nextStep, via son accesseur en écriture, en fonction des règles de la simulation.L’attribut est mis à true si la cellule reste en vie ou apparaît et à false si la cellule à cet emplacement disparaît ou reste absente. Une fois toute la grille parcourue, une deuxième passe est effectué pour associer la valeur de nexStep à l’attribut isAlive de chaque cellule.
