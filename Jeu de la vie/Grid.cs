@@ -22,7 +22,6 @@ namespace Jeu_de_la_vie
                 {
                     if (AliveCellsCoords.Contains(new Coords(i,j)))
                     {
-                        Console.WriteLine("Je m'active");
                         TabCells[i, j] = new Cell(true);
                     }
                     else
