@@ -1,12 +1,99 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Jeu_de_la_vie
 {
-    class Program
+    class Grid
     {
-        static void Main(string[] args)
+        private int _n; // taille de la grille
+        public int n { get { return _n; } set { _n = value; } } // accesseurs en lecture eten écriture
+        Cell[,] TabCells; // Tableau à deux dimensions contenant des objets de type Cell
+
+        public Grid(int nbCells, List<Coords> AliveCellsCoords) // Constructeur de la class Grid
         {
-            Console.WriteLine("Hello World!");
+            this.n = nbCells; // Initialisation de l’attribut _n au travers de l’accesseur en écriture
+            TabCells = new Cell[n, n]; // Création d’un tableau à deux dimensions de taillen,n
+            /* Remplissage du tableau avec à chaque emplacement une instance d’une cellule
+            Cell créée vivante (true) si les coordonnées sont dans la liste AliveCellsCoords
+            ou absente (false) sinon. */
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (AliveCellsCoords.Contains(...))
+                    {
+                        TabCells[i, j] = new Cell(true);
+                    }
+                    else
+                    {
+                        TabCells[i, j] = new Cell(false);
+                    }
+                }
+            }
+        }
+
+        public int getNbAliveNeighboor(int i, int j) // Méthode qui permet de déterminer le nombre de cellules vivantes autour d’un emplacement de coordonnées (i,j)
+        {
+            int nbCells = 0;
+            if (TabCells[i, j] == true)
+            {
+                nbCells += 1;
+            }
+            if (TabCells[i, j] == true)
+            {
+                nbCells += 1;  
+            }
+            if (TabCells[i, j] == true)
+            {
+                nbCells += 1;
+            }
+            if (TabCells[i, j] == true)
+            {
+                nbCells += 1;
+            }
+            if (TabCells[i, j] == true)
+            {
+                nbCells += 1;
+            }
+            if (TabCells[i, j] == true)
+            {
+                nbCells += 1;
+            }
+            if (TabCells[i, j] == true)
+            {
+                nbCells += 1;
+            }
+            if (TabCells[i, j] == true)
+            {
+                nbCells += 1;
+            }
+            return nbCells;
+        }    
+
+        public List<Coords> getCoordsNeighboors(int i, int j) // Méthode qui permet de déterminer toutes les coordonnées valides autour d’un emplacement de coordonnées(i, j)(attention à la gestion des cas particulier en bordure de grille)
+        {
+            
+        }    
+        
+        public List<Coords> getCoordsCellsAlive() // Méthode qui permet de déterminer la liste des coordonnées de toutes les cellules vivantes de la grille.
+        {
+
+        }
+
+        public void DisplayGrid() // Méthode qui permet d’afficher une représentation de grille en console avec un X à chaque emplacement où une cellule est vivante
+        {
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    
+                }
+            }
+        }
+
+        public void UpdateGrid() // Méthode qui parcourt chaque cellule et qui met à jour leur attribut _nextStep, via son accesseur en écriture, en fonction des règles de la simulation.L’attribut est mis à true si la cellule reste en vie ou apparaît et à false si la cellule à cet emplacement disparaît ou reste absente. Une fois toute la grille parcourue, une deuxième passe est effectué pour associer la valeur de nexStep à l’attribut isAlive de chaque cellule.
+        {
+            
         }
     }
 }

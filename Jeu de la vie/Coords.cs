@@ -2,11 +2,18 @@
 
 namespace Jeu_de_la_vie
 {
-    class Program
+    public readonly struct Coords
     {
-        static void Main(string[] args)
+        public Coords(int X, int Y)
         {
-            Console.WriteLine("Hello World!");
+            _x = X;
+            _y = Y;
         }
+
+        public int _x { get; }
+        public int _y { get; }
+
+        public override string ToString() => $"({_x}, {_y})";
     }
 }
+
