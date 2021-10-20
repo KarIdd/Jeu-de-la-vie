@@ -154,7 +154,7 @@ namespace Jeu_de_la_vie
             {
                 for (int j = 0; j < n; j++)
                 {
-                    if(TabCells[i, j].isAlive == true && getNbAliveNeighboor(i, j)==2 || getNbAliveNeighboor(i,j)==3)
+                    if(TabCells[i, j].isAlive == true && (getNbAliveNeighboor(i, j)==2 || getNbAliveNeighboor(i,j)==3))
                     {
                         TabCells[i, j].ComeAlive();
                     }

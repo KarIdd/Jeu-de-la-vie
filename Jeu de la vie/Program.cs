@@ -4,7 +4,7 @@ namespace Jeu_de_la_vie
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Game game = new Game(10, 10);
 
